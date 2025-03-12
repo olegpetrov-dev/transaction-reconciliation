@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CSV Comparison Results</title>
+</head>
+<body>
+<h1>CSV Comparison Results</h1>
+
+<p><strong>File: </strong><span th:text="${file1Name}"></span></p>
+<p><strong>Total Count: </strong><span th:text="${firstTransactionsTotalCount}"></span></p>
+<p><strong>Matching Count: </strong><span th:text="${firstTransactionsMatchingCount}"></span></p>
+<p><strong>Not perfectly matching Count: </strong><span th:text="${firstTransactionsNotPerfectlyMatchingCount}"></span></p>
+<p><strong>Not matching Count: </strong><span th:text="${firstTransactionsNotMatchingCount}"></span></p>
+
+<p><strong>File: </strong><span th:text="${file2Name}"></span></p>
+<p><strong>Total Count: </strong><span th:text="${secondTransactionsTotalCount}"></span></p>
+<p><strong>Matching Count: </strong><span th:text="${secondTransactionsMatchingCount}"></span></p>
+<p><strong>Not perfectly matching Count: </strong><span th:text="${secondTransactionsNotPerfectlyMatchingCount}"></span></p>
+<p><strong>Not matching Count: </strong><span th:text="${secondTransactionsNotMatchingCount}"></span></p>
+
+<h3>Not perfectly matched transactions:</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ProfileName 1</th>
+        <th>TransactionDate 1</th>
+        <th>TransactionAmount 1</th>
+        <th>TransactionNarrative 1</th>
+        <th>TransactionDescription 1</th>
+        <th>TransactionID 1</th>
+        <th>TransactionType 1</th>
+        <th>WalletReference 1</th>
+
+        <th>ProfileName 2</th>
+        <th>TransactionDate 2</th>
+        <th>TransactionAmount 2</th>
+        <th>TransactionNarrative 2</th>
+        <th>TransactionDescription 2</th>
+        <th>TransactionID 2</th>
+        <th>TransactionType 2</th>
+        <th>WalletReference 2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transactionPair : ${notPerfectlyMatchedTransactions}">
+        <td th:text="${transactionPair.getLeft().getProfileName()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionDate()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionAmount()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionNarrative()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionDescription()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionId()}"></td>
+        <td th:text="${transactionPair.getLeft().getTransactionType()}"></td>
+        <td th:text="${transactionPair.getLeft().getWalletReference()}"></td>
+
+        <td th:text="${transactionPair.getRight().getProfileName()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionDate()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionAmount()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionNarrative()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionDescription()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionId()}"></td>
+        <td th:text="${transactionPair.getRight().getTransactionType()}"></td>
+        <td th:text="${transactionPair.getRight().getWalletReference()}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<h3>Not matched transactions from file <span th:text="${file1Name}"></span>:</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ProfileName</th>
+        <th>TransactionDate</th>
+        <th>TransactionAmount</th>
+        <th>TransactionNarrative</th>
+        <th>TransactionDescription</th>
+        <th>TransactionID</th>
+        <th>TransactionType</th>
+        <th>WalletReference</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trasaction : ${firstNotMatchedTransactions}">
+        <td th:text="${trasaction.getProfileName()}"></td>
+        <td th:text="${trasaction.getTransactionDate()}"></td>
+        <td th:text="${trasaction.getTransactionAmount()}"></td>
+        <td th:text="${trasaction.getTransactionNarrative()}"></td>
+        <td th:text="${trasaction.getTransactionDescription()}"></td>
+        <td th:text="${trasaction.getTransactionId()}"></td>
+        <td th:text="${trasaction.getTransactionType()}"></td>
+        <td th:text="${trasaction.getWalletReference()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Not matched transactions from file <span th:text="${file2Name}"></span>:</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ProfileName</th>
+        <th>TransactionDate</th>
+        <th>TransactionAmount</th>
+        <th>TransactionNarrative</th>
+        <th>TransactionDescription</th>
+        <th>TransactionID</th>
+        <th>TransactionType</th>
+        <th>WalletReference</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trasaction : ${secondNotMatchedTransactions}">
+        <td th:text="${trasaction.getProfileName()}"></td>
+        <td th:text="${trasaction.getTransactionDate()}"></td>
+        <td th:text="${trasaction.getTransactionAmount()}"></td>
+        <td th:text="${trasaction.getTransactionNarrative()}"></td>
+        <td th:text="${trasaction.getTransactionDescription()}"></td>
+        <td th:text="${trasaction.getTransactionId()}"></td>
+        <td th:text="${trasaction.getTransactionType()}"></td>
+        <td th:text="${trasaction.getWalletReference()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p><a href="/index">Go back to upload more files</a></p>
+
+</body>
+</html>
